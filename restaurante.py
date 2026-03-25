@@ -44,3 +44,25 @@ class Chef(Empleado):
 
 #composicion
 #tengo 1 cocina y muchos cocineros o chefs (1:N en Entidad - Relacion)
+
+class Cocina:
+    # Esta clase existe solo en el restaurante
+    def __init__(self, chefs: list[Chef]) -> None: # Este es nuestro nuevo contructor de Chefs
+        self.chefs = chefs
+    @property #Muestra la informacion
+    def chefs(self) -> List[Chef]:
+        return self.chefs
+    @chefs.setter
+    def chefs(self, lista_chefs: list[Chef]) -> None:
+        if isinstance(lista_chefs, list) and all(isinstance(c, Chef) for c in lista_chefs):
+            self._chefs = lista_chefs
+        else:
+            raise ValueError("Debe ingresar datos correctos para los chefs")
+    def operar(self) -> None:
+
+        # Ejecutar el trabajo de todos los chefs
+        for chef in self.chefs:
+            chef.trabajar()
+
+        #self.cocina = Cocina ([Chef("Juan"),Chef("Cris")Chef("Miguel")])
+        #
